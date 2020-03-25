@@ -1,0 +1,12 @@
+{
+  "name": "procedural-language-generator",
+  "version": "1.0.0",
+  "description": "A random language generator to soothe your language generation woes",
+  "main": "index.js",
+  "repository": "https://github.com/Rainandray-netizen/procedural-language-generator.git",
+  "author": "rainandray-netizen <ryan.d.adrian.27@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
+}
