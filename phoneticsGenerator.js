@@ -46,21 +46,21 @@ const phoneticsGen = (vowsList, consList) => {
     // }
 
     const defSoundsGen = () => {
-        while (defSoundsResult.length<50){
+        while (defSoundsResult.length<200){
             defSoundsResult.push(
                 phoneticPool[Math.floor(Math.random()*poolLength)]+
                 phoneticPool[Math.floor(Math.random()*poolLength)]
             )
         }
 
-        while (defSoundsResult.length<75){
+        while (defSoundsResult.length<300){
             defSoundsResult.push(
                 consList[Math.floor(Math.random()*consListLength)]+
                 vowelFirst[Math.floor(Math.random()*vowelFirstPoolLength)]
             )
         }
 
-        while (defSoundsResult.length<100){
+        while (defSoundsResult.length<400){
             defSoundsResult.push(
                 consonantFirst[Math.floor(Math.random()*consonantFirstPoolLength)]+
                 consList[Math.floor(Math.random()*consListLength)]
@@ -73,11 +73,33 @@ const phoneticsGen = (vowsList, consList) => {
     const defSounds = defSoundsGen()
 
     return {
-        vowsList,
-        consList,
-        vowelFirst,
-        consonantFirst,
-        defSounds
+        vowsList:{
+            all:vowsList,
+            random:()=>vowsList[Math.floor(Math.random()*vowsListLength)]
+        },
+        consList:{
+            all:consList,
+            random:()=>consList[Math.floor(Math.random()*consListLength)]
+        },
+        vowelFirst:{
+            all:vowelFirst,
+            random:()=>vowelFirst[Math.floor(Math.random()*vowelFirstPoolLength)]
+        },
+        consonantFirst:{
+            all:consonantFirst,
+            random:()=>consonantFirst[Math.floor(Math.random()*consonantFirstPoolLength)]
+
+        },
+        defSounds:{
+            all:defSounds,
+            random:()=>defSounds[Math.floor(Math.random()*defSounds.length)]
+        },
+        syllables:{
+            all:[...consonantFirst,...vowelFirst],
+            random:()=>[...consonantFirst,...vowelFirst][
+                Math.floor(Math.random()*(consonantFirstPoolLength+vowelFirstPoolLength))
+            ]
+        }
     }
 }
 
