@@ -7,6 +7,7 @@
 
 const phoneticsGen = (vowsList, consList) => {
     const consListLength = consList.length
+    const vowsListLength = vowsList.length
 
     const vowelFirst = vowsList.map((vowel)=>{
         return consList.map((consonant)=>{
@@ -20,11 +21,31 @@ const phoneticsGen = (vowsList, consList) => {
         })
     }).flat()
 
-    const defSoundsGen = () => {
-        const phoneticPool = [...vowelFirst,...consonantFirst]
+    const phoneticPool = [...vowelFirst,...consonantFirst]
+    const defSoundsResult = []
+    const poolLength = phoneticPool.length
+    const vowelFirstPoolLength = vowelFirst.length
+    const consonantFirstPoolLength = consonantFirst.length
 
-        const poolLength = phoneticPool.length
-        const defSoundsResult = []
+    // const defSoundsGenNTC = () => {
+    //     while(defSoundsResult.length<50){
+    //         defSoundsResult.push(
+    //             consonantFirst[Math.floor(Math.random()*consonantFirstPoolLength)]+
+    //             consonantFirst[Math.floor(Math.random()*consonantFirstPoolLength)]
+    //         )
+    //     }
+        
+    //     while(defSoundsResult.length<75){
+    //         defSoundsResult.push(
+    //             vowelFirst[Math.floor(Math.random()*vowelFirstPoolLength)]+
+    //             vowsList[Math.floor(Math.random()*vowsListLength)]
+    //         )
+    //     }
+
+    //     return defSoundsResult
+    // }
+
+    const defSoundsGen = () => {
         while (defSoundsResult.length<50){
             defSoundsResult.push(
                 phoneticPool[Math.floor(Math.random()*poolLength)]+
@@ -32,7 +53,6 @@ const phoneticsGen = (vowsList, consList) => {
             )
         }
 
-        const vowelFirstPoolLength = vowelFirst.length
         while (defSoundsResult.length<75){
             defSoundsResult.push(
                 consList[Math.floor(Math.random()*consListLength)]+
@@ -40,7 +60,6 @@ const phoneticsGen = (vowsList, consList) => {
             )
         }
 
-        const consonantFirstPoolLength = consonantFirst.length
         while (defSoundsResult.length<100){
             defSoundsResult.push(
                 consonantFirst[Math.floor(Math.random()*consonantFirstPoolLength)]+
@@ -53,9 +72,13 @@ const phoneticsGen = (vowsList, consList) => {
 
     const defSounds = defSoundsGen()
 
-    // console.log(phoneticPool)
-
-    return defSounds
+    return {
+        vowsList,
+        consList,
+        vowelFirst,
+        consonantFirst,
+        defSounds
+    }
 }
 
 // morphObj.past(langIndex.pronoun.self,langIndex.verb.sleep)
