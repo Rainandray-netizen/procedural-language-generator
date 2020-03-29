@@ -1,5 +1,6 @@
 import { phoneticsGen } from './phoneticsGenerator'
 import { langIndexGen } from './langIndexGenerator'
+import { rulesetObj } from './ruleObject'
 
 const vowels = ['i','u','e','æ','ɛɪ']
 const consonants = ['ll','v','s','t','n','m','f','w']
@@ -9,6 +10,6 @@ const consonants = ['ll','v','s','t','n','m','f','w']
 
 const phonetics = phoneticsGen(vowels,consonants)
 
-const langIndex = langIndexGen(phonetics)
+const langIndex = langIndexGen(phonetics,rulesetObj)
 
 console.log(langIndex)
