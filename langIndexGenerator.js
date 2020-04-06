@@ -51,6 +51,88 @@ const langIndexGen = (phonetics, ruleset) => {
                 return root
             }
         },
+        sandwich:(root)=>{
+            const rule = ruleset.sandwich
+            let sandwichPrefix
+            let sandwichSuffix
+            const isVowelStart = vowsList.all.includes(root.charAt(0))
+            const isVowelEnd = vowsList.all.includes(root.charAt(root.length-1))
+            if(isVowelStart){
+                switch(rule.vowelStart){
+                    case 'vowelRoot':
+                        sandwichPrefix = vowsList.random()
+                        break
+                    case 'consonantRoot':
+                        sandwichPrefix = consList.random()
+                        break
+                    case 'vowelSylRoot':
+                        sandwichPrefix = vowelFirst.random()
+                        break
+                    case 'consonantSylRoot':
+                        sandwichPrefix = consonantFirst.random()
+                        break
+                    case 'defSoundRoot':
+                        sandwichPrefix = defSounds.random()
+                        break
+                }
+            }else{
+                switch(rule.consonantStart){
+                    case 'vowelRoot':
+                        sandwichPrefix = vowsList.random()
+                        break
+                    case 'consonantRoot':
+                        sandwichPrefix = consList.random()
+                        break
+                    case 'vowelSylRoot':
+                        sandwichPrefix = vowelFirst.random()
+                        break
+                    case 'consonantSylRoot':
+                        sandwichPrefix = consonantFirst.random()
+                        break
+                    case 'defSoundRoot':
+                        sandwichPrefix = defSounds.random()
+                        break
+                }
+            }
+           if(isVowelEnd){
+               switch(rule.vowelEnd){
+                   case 'rootVowel':
+                        sandwichSuffix = vowsList.random()
+                        break
+                    case 'rootConsonant':
+                        sandwichSuffix = consList.random()
+                        break
+                    case 'rootVowelSyl':
+                        sandwichSuffix = vowelFirst.random()
+                        break
+                    case 'rootConsonantSyl':
+                        sandwichSuffix = consonantFirst.random()
+                        break
+                    case 'rootDefSound':
+                        sandwichSuffix = defSounds.random()
+                        break
+               }
+           }else{
+                switch(rule.consonantEnd){
+                    case 'rootVowel':
+                        sandwichSuffix = vowsList.random()
+                        break
+                    case 'rootConsonant':
+                        sandwichSuffix = consList.random()
+                        break
+                    case 'rootVowelSyl':
+                        sandwichSuffix = vowelFirst.random()
+                        break
+                    case 'rootConsonantSyl':
+                        sandwichSuffix = consonantFirst.random()
+                        break
+                    case 'rootDefSound':
+                        sandwichSuffix = defSounds.random()
+                        break
+                }
+            }
+            return sandwichPrefix + root + sandwichSuffix
+        },
         verbify:(root)=>{
             const rule = ruleset.verb
             let verbMod
@@ -96,7 +178,7 @@ const langIndexGen = (phonetics, ruleset) => {
             it: rootManipulator.prefix(pronounRoot),
         },
         verbs:{
-            toDo: rootManipulator.verbify(defSounds.random()),
+            toDo: rootManipulator.verbify(vowsList.random()),
             toEat: rootManipulator.verbify(defSounds.random()),
             toSleep: rootManipulator.verbify(defSounds.random()),
             toSee: rootManipulator.verbify(defSounds.random()),
@@ -106,9 +188,10 @@ const langIndexGen = (phonetics, ruleset) => {
             toTouch: rootManipulator.verbify(defSounds.random()),
             toFight: rootManipulator.verbify(defSounds.random()),
             toMagic: rootManipulator.verbify(defSounds.random()),
-            toGo: rootManipulator.verbify(defSounds.random()),
+            toGo: rootManipulator.verbify(vowsList.random()),
+            toCome: rootManipulator.verbify(vowsList.random()),
             toWalk: rootManipulator.verbify(defSounds.random()),
-            toRun: rootManipulator.verbify(defSounds.random()) ,
+            toRun: rootManipulator.verbify(defSounds.random()),
             toJump: rootManipulator.verbify(defSounds.random()),
             toDodge: rootManipulator.verbify(defSounds.random()),
             toDuck: rootManipulator.verbify(defSounds.random()),
@@ -147,6 +230,10 @@ const langIndexGen = (phonetics, ruleset) => {
                 outside: rootManipulator.prefix(defSounds.random()),
                 far: rootManipulator.prefix(defSounds.random()),
                 near: rootManipulator.prefix(defSounds.random()),
+                north: rootManipulator.suffix(defSounds.random()),
+                south: rootManipulator.suffix(defSounds.random()),
+                east: rootManipulator.suffix(defSounds.random()),
+                west: rootManipulator.suffix(defSounds.random())
             },
             color:{
                 red: syllables.random()+syllables.random(),
@@ -199,8 +286,91 @@ const langIndexGen = (phonetics, ruleset) => {
         },
         nouns:{
             defArticle:{
-                // this:,
-                // that:
+                this: rootManipulator.prefix(defSounds.random()),
+                that: rootManipulator.prefix(defSounds.random()),
+                the: defSounds.random(),
+                a: syllables.random()
+            },
+            adventuring:{
+                ally: rootManipulator.sandwich(defSounds.random()),
+                enemy: rootManipulator.sandwich(defSounds.random()),
+                leader: rootManipulator.sandwich(defSounds.random()),
+                magic: rootManipulator.sandwich(defSounds.random()),
+                arcane: rootManipulator.sandwich(defSounds.random()),
+                divine: rootManipulator.sandwich(defSounds.random()),
+                sword: rootManipulator.sandwich(defSounds.random()),
+                spear: rootManipulator.sandwich(defSounds.random()),
+                shield: rootManipulator.sandwich(defSounds.random()),
+                artifact: rootManipulator.sandwich(defSounds.random()),
+            },
+            geographic:{
+                mountain: rootManipulator.sandwich(defSounds.random()),
+                ocean: rootManipulator.sandwich(defSounds.random()),
+                hill: rootManipulator.sandwich(defSounds.random()),
+                lake: rootManipulator.sandwich(defSounds.random()),
+                continent: rootManipulator.sandwich(defSounds.random()),
+                island: rootManipulator.sandwich(defSounds.random()),
+                peninsula: rootManipulator.sandwich(defSounds.random()),
+                forest: rootManipulator.sandwich(defSounds.random()),
+                grassland: rootManipulator.sandwich(defSounds.random()),
+                desert: rootManipulator.sandwich(defSounds.random()),
+                jungle: rootManipulator.sandwich(defSounds.random()),
+                river: rootManipulator.sandwich(defSounds.random()),
+                cave: rootManipulator.sandwich(defSounds.random()),
+            },
+            manmade:{
+                city: rootManipulator.sandwich(defSounds.random()),
+                town: rootManipulator.sandwich(defSounds.random()),
+                village: rootManipulator.sandwich(defSounds.random()),
+                nation: rootManipulator.sandwich(defSounds.random()),
+                capitol: rootManipulator.sandwich(defSounds.random()),
+                building: rootManipulator.sandwich(defSounds.random()),
+                home: rootManipulator.prefix(defSounds.random()),
+                well: rootManipulator.prefix(defSounds.random()),
+                wheel: rootManipulator.prefix(defSounds.random()),
+                door: rootManipulator.prefix(defSounds.random()),
+                table: rootManipulator.prefix(defSounds.random()),
+                chair: rootManipulator.prefix(defSounds.random()),
+                throne: rootManipulator.prefix(defSounds.random()),
+                window: rootManipulator.prefix(defSounds.random()),
+                bed: rootManipulator.prefix(defSounds.random()),
+                chamberPot: rootManipulator.prefix(defSounds.random()),
+                garbage: rootManipulator.prefix(defSounds.random()),    
+            },
+            elemental:{
+                plant: rootManipulator.sandwich(defSounds.random()),
+                animal: rootManipulator.sandwich(defSounds.random()),
+                fire: rootManipulator.prefix(defSounds.random()),
+                water: rootManipulator.prefix(defSounds.random()),
+                earth: rootManipulator.prefix(defSounds.random()),
+                air: rootManipulator.prefix(defSounds.random()),
+                fae: rootManipulator.sandwich(defSounds.random()),
+                shadow: rootManipulator.sandwich(defSounds.random()),
+                demon: rootManipulator.sandwich(defSounds.random()),
+                devil: rootManipulator.sandwich(defSounds.random()),
+                angel:rootManipulator.sandwich(defSounds.random()),
+                abberation: rootManipulator.sandwich(defSounds.random()),
+            },
+            familial:{
+                ancestor: rootManipulator.sandwich(defSounds.random()),
+                grandfather: rootManipulator.sandwich(defSounds.random()),
+                grandmother: rootManipulator.sandwich(defSounds.random()),
+                grandparent: rootManipulator.sandwich(defSounds.random()),
+                father: rootManipulator.sandwich(defSounds.random()),
+                mother: rootManipulator.sandwich(defSounds.random()),
+                parent: rootManipulator.sandwich(defSounds.random()),
+                son: rootManipulator.sandwich(defSounds.random()),
+                daughter: rootManipulator.sandwich(defSounds.random()),
+                child: rootManipulator.sandwich(defSounds.random()),
+                brother: rootManipulator.sandwich(defSounds.random()),
+                sister: rootManipulator.sandwich(defSounds.random()),
+                sibling: rootManipulator.sandwich(defSounds.random()),
+                grandson: rootManipulator.sandwich(defSounds.random()),
+                granddaughter: rootManipulator.sandwich(defSounds.random()),
+                grandchild: rootManipulator.sandwich(defSounds.random()),
+                uncle: rootManipulator.sandwich(defSounds.random()),
+                aunt: rootManipulator.sandwich(defSounds.random()),
+                cousin: rootManipulator.sandwich(defSounds.random()),
             }
         }
     }
